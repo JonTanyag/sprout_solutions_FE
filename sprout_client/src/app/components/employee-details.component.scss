@@ -1,0 +1,48 @@
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    height: 90%;
+    width: 100%;
+    padding: 40px;
+
+    .container {
+        background-color: #fff;
+        height: 100px;
+        width: 220px;
+        border-width: 1px;
+        border-radius: 2px;
+        border-bottom-width: 0;
+        margin-left: 5px;
+        margin-right: 5px;
+        margin-top: 10px;
+        box-shadow: 1px 1px 1px 1px #000;
+        font-size: 14px;
+        // flex-direction: column;
+
+        .details-section {
+            background-color: red;
+            flex-direction: row;
+
+            .name {
+                float: left;
+            }
+    
+            .attributes {
+                flex-direction: row;
+                float: left;
+            }
+        }
+        
+        .image-section {
+            background-color: #060b26;
+
+            .img {
+                float: right;
+            }
+        }
+        
+    }
+
+}
+
