@@ -9,8 +9,6 @@ import { cloneDeep } from "lodash";
 import { useRxEffect } from "../shared/utils/utils";
 import { Button, Icon, Image, Input, List } from "semantic-ui-react";
 import { of } from 'rxjs';
-import {ajax} from 'rxjs/ajax';
-import { map } from 'rxjs/operators';
 
 interface State {
     loading: boolean;
@@ -32,20 +30,14 @@ export const EmployeesComponent = memo(
     forwardRef<Ref, Props>((props, ref) => {
         const [state, setState] = useState<State>(initialState(props));
 
-        useEffect(() => {
-            console.log('AHAHAHAHAHA')
+        useRxEffect(() => $GetDataService.getEmployees().subscribe(res => {
+            const list = cloneDeep(res);
+            const sourcesList = cloneDeep(res);
 
-            const subscribe = of($GetDataService.getEmployees()).subscribe(res => {
-                const list = cloneDeep(res);
-                const sourcesList = cloneDeep(res);
+            setState(prevState => ({ ...prevState, list, sourcesList }));
 
-                setState(prevState => ({ ...prevState, list, sourcesList }));
-            })
+        }), []);
 
-            return () => {
-                subscribe.unsubscribe();
-            }
-        })
 
         const handleViewDetails = useCallback((item) => {
             return () => {
